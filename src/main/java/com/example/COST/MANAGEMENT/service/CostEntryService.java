@@ -2,6 +2,7 @@ package com.example.COST.MANAGEMENT.service;
 
 import com.example.COST.MANAGEMENT.dto.CostEntryRequest;
 import com.example.COST.MANAGEMENT.dto.CostEntryResponse;
+import com.example.COST.MANAGEMENT.dto.CustomResponse;
 import com.example.COST.MANAGEMENT.exception.NotFoundException;
 import com.example.COST.MANAGEMENT.mapper.CostEntryMapper;
 import com.example.COST.MANAGEMENT.model.CostEntry;
@@ -9,6 +10,7 @@ import com.example.COST.MANAGEMENT.repository.CostEntryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,5 +39,10 @@ public class CostEntryService {
             return costEntryResponse;
         }).toList();
         return costEntriesResponse;
+    }
+    public CustomResponse deleteCostEntry(Long id) {
+        costEntryRepository.findById(id).orElseThrow(()->new NotFoundException(String.format("CostEntry with id %s not found", id)));
+        costEntryRepository.deleteById(id);
+        return new CustomResponse("Cost Entry deleted successfully", LocalDateTime.now());
     }
 }

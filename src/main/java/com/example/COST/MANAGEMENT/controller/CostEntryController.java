@@ -2,6 +2,7 @@ package com.example.COST.MANAGEMENT.controller;
 
 import com.example.COST.MANAGEMENT.dto.CostEntryRequest;
 import com.example.COST.MANAGEMENT.dto.CostEntryResponse;
+import com.example.COST.MANAGEMENT.dto.CustomResponse;
 import com.example.COST.MANAGEMENT.service.CostEntryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class CostEntryController {
     {
         List<CostEntryResponse>costEntryResponses=costEntryService.getAllCostEntries();
         return new ResponseEntity<>(costEntryResponses, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CustomResponse>DeleteClient(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(costEntryService.deleteCostEntry(id), HttpStatus.OK);
     }
 }
