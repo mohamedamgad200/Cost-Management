@@ -2,6 +2,7 @@ package com.example.COST.MANAGEMENT.controller;
 import com.example.COST.MANAGEMENT.dto.InvoiceRequest;
 import com.example.COST.MANAGEMENT.dto.InvoiceResponse;
 import com.example.COST.MANAGEMENT.model.Invoice;
+import com.example.COST.MANAGEMENT.service.InvoiceReminderService;
 import com.example.COST.MANAGEMENT.service.InvoiceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InvoiceController {
     private final InvoiceService invoiceService;
+    private final InvoiceReminderService invoiceReminderService;
     @PostMapping
     public ResponseEntity<InvoiceResponse> createInvoice(@Valid @RequestBody InvoiceRequest invoiceRequest) {
         return new ResponseEntity<>(invoiceService.createInvoice(invoiceRequest), HttpStatus.CREATED);
@@ -35,6 +37,5 @@ public class InvoiceController {
     public ResponseEntity<InvoiceResponse> getInvoiceById(@PathVariable Long id) {
         return new ResponseEntity<>(invoiceService.getInvoiceById(id), HttpStatus.OK);
     }
-
 
 }

@@ -27,7 +27,7 @@ public class InvoiceMapper {
                 .id(invoice.getId())
                 .invoiceNumber(invoice.getInvoiceNumber())
                 .issueDate(invoice.getIssueDate())
-                .dueDate(invoice.getIssueDate().plusDays(5))
+                .dueDate(invoice.getDueDate())
                 .subtotal(invoice.getSubtotal())
                 .tax(invoice.getTax())
                 .discount(invoice.getDiscount())
